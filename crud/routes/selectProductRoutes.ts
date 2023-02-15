@@ -14,7 +14,7 @@ const idtoNumber = (request: Request, response:Response, next:NextFunction) => {
 }
 
 
-router.post('/select',idtoNumber, selectProductController.handle)
+router.get('/select',idtoNumber, selectProductController.handle)
 
 export { router as selectProductRouter}
 export { idtoNumber}

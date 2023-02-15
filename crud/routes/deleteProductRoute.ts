@@ -8,6 +8,6 @@ const router = Router()
 
 
 
-router.post('/delete',idtoNumber, pricetoNumber, deleteProduct.handle)
+router.delete('/delete',idtoNumber, pricetoNumber, deleteProduct.handle)
 
 export { router as deleteProductRouter}
