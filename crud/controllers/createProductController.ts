@@ -22,7 +22,8 @@ export class CreateProductController{
                     
             }
         )
-        response.send(`quered!, your data:' ${name}, ${category}, ${brand}, ${price}`)
+        return response.status(200).send(produto)
+        
     }
 }
 

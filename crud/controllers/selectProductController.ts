@@ -11,6 +11,6 @@ export class SelectProductController{
         
         const select = await prisma.products.findMany 
         ( { where:{ id, } } )
-           return response.send(select)
+        return response.send(select)
     }
 }

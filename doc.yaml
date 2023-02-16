@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info: 
+  title: testando documentação
+  description: testando campo
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000
+    description: servidor de teste
+
+paths:
+  /create:
+    post:
+      summary: cria um novo produto
+      description: essa rota é responsável por cadastrar um novo produto
+      tags:
+        - product 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+            examples:
+              product: 
+                value:
+                  name: "mouse"
+                  category: "periférico"
+                  brand: "multilaser"
+                  price: 30
+      responses:
+        200:
+          description: objeto criado
+          schema:
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+              category:
+                type: string
+              brand:
+                type: string
+              price:
+                type: number
+              
+              
+components:
+  schemas:
+    Product:
+      properties:
+        name:
+          type: string
+        category:
+          type: string
+        brand:
+          type: string
+        price:
+          type: number
+        aelatorio:
+          type: string
