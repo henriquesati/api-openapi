@@ -1,25 +1,34 @@
 import { Router, json, NextFunction, RequestHandler, Request, Response} from "express";
-import { Express } from "express";
-import { createProductRouter } from "./createProductRoutes";
-import { selectProductRouter } from "./selectProductRoutes";
-import { updateProductRouter } from "./updateProductRoute";
-import { deleteProductRouter } from "./deleteProductRoute";
+import { pricetoNumber, idtoNumber } from "./middleware";
+import { CreateProductController } from "../controllers/createProductController";
+import { SelectProductController } from "../controllers/selectProductController";
+import { UpdateProductController } from "../controllers/updateProductController";
+import { DeleteProductController } from "../controllers/deleteProductController";
 
+const createProduct = new CreateProductController()
+const selectProduct = new SelectProductController()
+const updateProduct = new UpdateProductController()
+const deleteProduct = new DeleteProductController()
+const router = Router()
 
+router
+.post('/create', pricetoNumber, createProduct.handle)
 
+router
+.get('/select', idtoNumber, selectProduct.handle)
 
-const routes = Router()
-routes.use(createProductRouter)
-routes.use(selectProductRouter)
-routes.use(updateProductRouter)
-routes.use(deleteProductRouter)
+router
+.post('/update', idtoNumber, pricetoNumber, updateProduct.handle)
 
-
-
-routes.get('/', (req, res)=>{
-res.send('hello world')
-})
-
+router
+.delete('/delete',idtoNumber, deleteProduct.handle)
 
 export { }
-export { routes }
+export { router }
+
+
+
+
+
+
+

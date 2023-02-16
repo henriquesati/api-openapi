@@ -1,34 +1,22 @@
-import { Request, response, Response } from 'express'
+import { Request, response, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient
+const prisma = new PrismaClient();
 
-
-export class DeleteProductController{
-    async handle(request: Request, response: Response) {
-        const { id } = request.body
-        
-        if (Number.isNaN(id)){ return response.json(`invalid price `) }
-        
-        const deleteProduct = await prisma.products.delete(
-            {
-                where:
-                {
-                    id,
-                }
-            }
-            
-           )
-        return response.json(deleteProduct)
-    }   
-
+export class DeleteProductController {
+  async handle(request: Request, response: Response) {
+    const { id } = request.body;
+    if (Number.isNaN(id)) {
+      return response.json(`invalid id`);
+    }
+    try {
+      const deleteProduct = await prisma.products.delete({
+        where: {
+          id,
+        },
+      });
+      return response.json(deleteProduct);
+    } catch (error) {
+      response.status(404).json("registro não encontado ");
+    }
+  }
 }
-async function main() {
-    let delet = await prisma.products.delete(
-        {
-            where: { id: 2}
-        }
-    ) 
-    console.log(delet);
-    
-}
-// main()
