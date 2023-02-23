@@ -5,14 +5,14 @@ info:
   version: 1.0.0
 
 servers:
-  - url: http://localhost:5000
+  - url: http://localhost:4000
     description: servidor de teste
 
 paths:
   /create:
     post:
       summary: cria um novo produto
-      description: essa rota é responsável por cadastrar um novo produto
+      description: rota é responsável por cadastrar um novo produto
       tags:
         - product 
       requestBody:
@@ -30,21 +30,32 @@ paths:
                   price: 30
       responses:
         200:
-          description: objeto criado
+          description: produto criado
           schema:
-            type: object
-            properties:
-              id:
-                type: number
-              name:
-                type: string
-              category:
-                type: string
-              brand:
-                type: string
-              price:
-                type: number
-              
+            $ref: "#/components/schemas/ProductResponse"
+  /select/{id}:
+    get:
+      summary: Seleciona um produto para a camada de visualização
+      description: Rota responsável por selecionar um produto com base no id
+      tags:
+        - produto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Produto selecionado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+          404:
+            description: Produto não encontrado
+
               
 components:
   schemas:
@@ -60,3 +71,15 @@ components:
           type: number
         aelatorio:
           type: string
+    ProductResponse:
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        category:
+          type: string
+        brand:
+          type: string
+        price:
+          type: number

@@ -18,6 +18,9 @@ export function idtoNumber(
     next: NextFunction
 ) {
     let { id } = request.body
+    if (!id) {
+        id = request.params.id
+    }
     request.body.id = parseInt(id) as number
     next()
 }

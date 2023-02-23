@@ -15,7 +15,7 @@ router
 .post('/create', pricetoNumber, createProduct.handle)
 
 router
-.get('/select', idtoNumber, selectProduct.handle)
+.get('/select/:id', idtoNumber, selectProduct.handle)
 
 router
 .post('/update', idtoNumber, pricetoNumber, updateProduct.handle)
