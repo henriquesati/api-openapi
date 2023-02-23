@@ -26,7 +26,7 @@ paths:
                 value:
                   name: "mouse"
                   category: "periférico"
-                  brand: "multilaser"
+                  brand: "multilaser"  
                   price: 30
       responses:
         200:
@@ -38,7 +38,7 @@ paths:
       summary: Seleciona um produto para a camada de visualização
       description: Rota responsável por selecionar um produto com base no id
       tags:
-        - produto
+        - product
       parameters:
         - name: id
           in: path
@@ -49,14 +49,51 @@ paths:
       responses:
         200:
           description: Produto selecionado com sucesso
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProductResponse"
-          404:
-            description: Produto não encontrado
+          schema:
+            $ref: "#/components/schemas/ProductResponse"
+        404:
+           description: Produto não encontrado
+  /delete:
+    delete:
+      summary: rota responsavel por deletar um produto com base no id
+      tags:
+        - product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+      responses:
+        200:
+          description: produto deletado
+          schema:
+            $ref: "#/components/schemas/Product"
+        404:
+          description: produto não encontrado
+  /update:
+    post:
+      summary: atualiza um produto com base no id
+      tags:
+        - product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductResponse"          
+      responses:
+        200:
+          description: produto atualizado
+          schema:
+            $ref: "#/components/schemas/ProductResponse"
+            
 
-              
+
+
 components:
   schemas:
     Product:

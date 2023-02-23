@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 export class SelectProductController{
     async handle(request: Request, response: Response) {
-        const id = parseInt(request.params.id)
+        const id: number = parseInt(request.params.id)
         if (Number.isNaN(id)) {
             return response.json(`invalid id ${request.params.id}`)
         }
